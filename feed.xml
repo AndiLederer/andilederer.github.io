@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Niklas Buschmann 2015 MIT <http://github.com/niklasbuschmann> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    
+    <meta name="description" content="">
+    <title>Post Digitalesumfeld</title>
+    <link rel="canonical" href="http://andilederer.github.io//feed.xml">
+    <link href="/main.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Gentium+Basic:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link rel="alternate" type="application/rss+xml" title="Post Digitalesumfeld &raquo; Feed" href="/feed.xml">
+    
+    
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Post Digitalesumfeld</a></h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li><li><a href="/archive.html">Archive</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    
+    <article>
+      <header>
+        <h2><a href="/feed.xml"></a></h2>
+        <p></p>
+      </header>
+      <div>
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -5,8 +40,8 @@
     <description></description>
     <link>http://andilederer.github.io/</link>
     <atom:link href="http://andilederer.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 02 Sep 2015 20:40:45 +0200</pubDate>
-    <lastBuildDate>Wed, 02 Sep 2015 20:40:45 +0200</lastBuildDate>
+    <pubDate>Wed, 02 Sep 2015 20:43:58 +0200</pubDate>
+    <lastBuildDate>Wed, 02 Sep 2015 20:43:58 +0200</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -54,65 +89,6 @@ Viele Fragen gehen mir durch den Kopf, wenn ich an meinen Blog denke. Die Welt i
         
         
         <category>uncategorized</category>
-        
-      </item>
-    
-      <item>
-        <title>Example</title>
-        <description>&lt;p&gt;&lt;strong&gt;Basic&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Neque porro &lt;em&gt;quisquam&lt;/em&gt; est, qui &lt;strong&gt;dolorem&lt;/strong&gt; ipsum, quia &lt;strong&gt;&lt;em&gt;dolor&lt;/em&gt;&lt;/strong&gt; sit, amet, &lt;a href=&quot;http://cjdns.info/&quot;&gt;consectetur&lt;/a&gt;, adipisci velit.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;lorem&lt;/li&gt;
-  &lt;li&gt;ipsum&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;dolor&lt;/li&gt;
-  &lt;li&gt;sit&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;First Header&lt;/th&gt;
-      &lt;th&gt;Second Header&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Table Cell&lt;/td&gt;
-      &lt;td&gt;Table Cell&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;Blockquote&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;They who can give up essential liberty to obtain a little temporary safety, deserve neither liberty nor safety.&lt;/p&gt;
-
-  &lt;p&gt;&lt;em&gt;Benjamin Franklin&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;Code&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asyncEnabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vAdmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;txid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Allocator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestAlloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Identity_check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vAdmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;asyncEnabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Dict&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dict_CONST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String_CONST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;asyncEnabled&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int_OBJ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Admin_sendMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;txid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Thu, 11 Sep 2014 00:37:00 +0200</pubDate>
-        <link>http://andilederer.github.io//example/2014/09/11/example.html</link>
-        <guid isPermaLink="true">http://andilederer.github.io//example/2014/09/11/example.html</guid>
-        
-        
-        <category>example</category>
         
       </item>
     
@@ -3392,3 +3368,15 @@ Nach dieser Geschichte noch Beschreibung wie man “Permalink” zurück setzen 
     
   </channel>
 </rss>
+      </div>
+      
+      
+    </article>
+
+    <footer>
+      <span><a href="http://andilederer.github.io/">Andreas Lederer</a></span>
+      <span><a href="https://github.com/AndiLederer/"><i class="fa fa-github-square"></i></a></span>
+      <span>&copy; 2015</span>
+    </footer>
+  </body>
+</html>
