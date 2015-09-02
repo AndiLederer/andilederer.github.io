@@ -1,0 +1,36 @@
+<p>Der Wechsel eines Java-Web-Servers sollte eigentlich keine große Angelegenheit sein. In meinem Portierungsprojekt musste zum Glück keine Codeänderung und keine Lib ausgetauscht werden. Ein paar Einstellungen waren doch vorzunehmen. Besonders hilfreich war dabei die <a href="https://docs.jboss.org/author/display/AS71/Spring+applications+development+and+migration+guide">JBoss AS 7 migrations guide</a>. Den JBoss as 7 habe ich bei diesem Test im Standalonemodus ausgeführt, die Konfiguration im standalone.xml habe ich nicht verändert.</p>
+<div>
+<h1>JPA Properties</h1>
+<div>JBoss as7 kommt mit einer eigenen Unterstützung für JPA, diese durchsucht das Projekt nach dem File "persistence.xml". Dieses File sollte umbenannt werden, damit hier kein Konflikt entstehen kann. In der JBoss Konfiguration kann auch das JPA-Modul entfernt werden.</div>
+<div>Im Beispielcode habe ich den Namen "jpa-persistence.xml" vergeben.</div>
+<div></div>
+<div>
+[sourcecode language="xml"]
+&lt;bean id=&quot;entityManagerFactory&quot; class=&quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&quot;&gt;
+    &lt;property name=&quot;persistenceXmlLocation&quot; 
+        value=&quot;classpath*:META-INF/jpa-persistence.xml&quot;/&gt;
+&lt;/bean&gt;
+
+[/sourcecode]
+<div></div>
+<h1>Hibernate</h1>
+<div>In meinem Projekt setze ich JPA in Verbindung mit Hibernate ein. Hibernate wird auch von JBoss selber zur Verfügung gestellt.</div>
+<div>Ich wollte die eigene Version verwenden, damit zur Tomcatumgebung kein Unterschied entsteht. Die von JBoss geladenen Libs können mit der Datei "WEB-INF/jboss-deployment-structure.xml" gesteuert werden. Die Datei kann im WEB-INF oder META-INF Verzeichnis abgelegt werden.</div>
+<div></div>
+<div>
+[sourcecode language="xml"]
+&lt;jboss-deployment-structure 
+    xmlns=&quot;urn:jboss:deployment-structure:1.0&quot;&gt;
+&lt;deployment&gt;
+    &lt;exclusions&gt;
+       &lt;module name=&quot;org.hibernate&quot;&gt;
+    &lt;/exclusions&gt;
+  &lt;/deployment&gt;
+&lt;/jboss-deployment-structure&gt;
+[/sourcecode]
+</div>
+<div></div>
+<h1>Apache CXF</h1>
+<div>Eine weitere Befürchtung war, dass die WebServices die über das <a href="http://cxf.apache.org/">Apache CXF Framework</a> bereitgestellt werden, unter JBoss ein eigenes Verhalten zeigen. Zum Glück kam es zu keinen Problemen, obwohl beim Starten eine Fehlermeldung ausgegeben wurde.</div>
+</div>
+</div>

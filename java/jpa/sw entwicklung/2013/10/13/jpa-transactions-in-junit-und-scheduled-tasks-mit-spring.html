@@ -1,0 +1,55 @@
+<p><img src="http://farm1.staticflickr.com/201/506328659_22260c5bb2_d.jpg" /><br />In regelmäßigen Abständen versuche ich dieses Problem zu lösen. Meistens habe ich in der Zwischenzeit vergessen, wo ich das Problem das letzte Mal gelöst habe. Die Codestellen vermehren sich zwar, trotzdem wird es Zeit die paar Zeilen Code festzuhalten.</p>
+<h1>jUnit Spring <em>AbstractTransactionalJUnit4SpringContextTests</em> </h1>
+<p>Die einfachste Möglichkeit ist die Testklasse von <em>AbstractTransactionalJUnit4SpringContextTests</em> abzuleiten. Leider funktioniert das nur, wenn auch nur genau ein <em>JpaTransactionManager</em> als Spring-Bean existiert. In Systemen mit unterschiedlichen Datenquellen ist damit nichts zu machen.</p>
+<h1>jUnit Spring mit Annotations</h1>
+<p>Ist keine Ableitung erwünscht oder existieren mehr als ein TransactionManager, verwende ich meistens diese Lösung. Grundsätzlich ist das genau der Code, der in den zwei Klassen</p>
+<ul> <li><em><a href="https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/main/java/org/springframework/test/context/junit4/AbstractTransactionalJUnit4SpringContextTests.java">AbstractTransactionalJUnit4SpringContextTests</a></em>  <li><em><a href="https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/main/java/org/springframework/test/context/junit4/AbstractJUnit4SpringContextTests.java">AbstractJUnit4SpringContextTests</a></em><em></em> </li> <p>verwendet wird. </p> <div class="csharpcode"><pre class="alt">@ContextConfiguration(<span class="str">"classpath*:application-context.xml"</span>)</pre></div>
+<div class="csharpcode"><pre>@RunWith(SpringJUnit4ClassRunner.<span class="kwrd">class</span>)</pre></div>
+<div class="csharpcode"><pre class="alt">@TestExecutionListeners({</pre></div>
+<div class="csharpcode"><pre>    DependencyInjectionTestExecutionListener.<span class="kwrd">class</span>,</pre></div>
+<div class="csharpcode"><pre class="alt">    DirtiesContextTestExecutionListener.<span class="kwrd">class</span>,</pre></div>
+<div class="csharpcode"><pre>    TransactionalTestExecutionListener.<span class="kwrd">class</span></pre></div>
+<div class="csharpcode"><pre class="alt">})</pre></div>
+<div class="csharpcode"><pre><p>@Transactional</p><p>@TransactionConfiguration</p><p>    (transactionManager = "transactionManagerTarget", </p><p>     defaultRollback = true)</p></pre></div>
+<div class="csharpcode"><pre class="alt"><span class="kwrd">public</span> <span class="kwrd">class</span> TransactionTest{</pre></div>
+<div class="csharpcode"><pre>    @Resource(name=<span class="str">"transactionalClass"</span>)</pre></div>
+<div class="csharpcode"><pre class="alt">    TransactionalClass transactionalClass;</pre></div>
+<div class="csharpcode"><pre>    </pre></div>
+<div class="csharpcode"><pre class="alt">   @Transactional</pre></div>
+<div class="csharpcode"><pre>   @Test</pre></div>
+<div class="csharpcode"><pre class="alt">    <span class="kwrd">public</span> <span class="kwrd">void</span> testTransaction(){</pre></div>
+<div class="csharpcode"><pre>        ...</pre></div>
+<div class="csharpcode"><pre class="alt">    }</pre></div>
+<div class="csharpcode"><pre>}</pre><font color="#000000" size="2" face="Consolas"></font></div>
+<h1>Mit TransactionManager erstellen</h1>
+<p>Natürlich kann man mit dem TransactionManager auch direkt eine Transaction öffnen und schließen. Dazu werden auch keine Annotations benötigt.</p>
+<div class="csharpcode"><pre class="alt">@Resource(name=<span class="str">"transactionManager"</span>)</pre><pre>JpaTransactionManager transactionManager;</pre><pre class="alt">...</pre><pre>&nbsp;</pre><pre class="alt">DefaultTransactionAttribute transactionAttribute = </pre><pre>    <span class="kwrd">new</span> DefaultTransactionAttribute (TransactionDefinition.PROPAGATION_REQUIRED);</pre><pre class="alt">TransactionStatus status = transactionManager</pre><pre>    .getTransaction(transactionAttribute);</pre></div>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+
+<p>Mit diesen drei Möglichkeiten sollten eigentlich alle Fälle abgedeckt sein. Die beste Quellen dazu war natürlich auf <a href="http://stackoverflow.com/questions/10651830/how-to-configure-mutliple-transaction-managers-with-spring-dbunit-junit">StackOverflow</a>.</p>
+<p><a href="http://www.flickr.com/photos/psd/">Bildquelle</a></p>
+</li></ul>

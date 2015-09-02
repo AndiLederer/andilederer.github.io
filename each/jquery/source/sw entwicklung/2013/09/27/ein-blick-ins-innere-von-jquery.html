@@ -1,0 +1,40 @@
+<p><img alt="" src="http://farm6.staticflickr.com/5512/9654775579_c3e2d20224_d.jpg" />
+Beruflich habe ich noch nie mit jQuery gearbeitet. Dort kamen Mootools und ExtJS zum Einsatz. Beide Frameworks haben immer gute Dienste geleistet. Ich wollte auch nicht <a href="http://learn.jquery.com/">jQuery verwenden</a>, mich interessiert mehr die Implementierung und um den Code innerhalb von jQuery.</p>
+
+<p>Dazu habe ich mir die <a href="http://jquery.com/download/">Entwicklungsversion</a> von jQuery herunter geladen und gleich nach der einzigen Funktion gesucht die ich kenne, der “each”-Funktion. Laut <a href="http://api.jquery.com/each/">API</a> nimmt die Funktion einen Callback-Parameter entgegen.</p>
+
+<p><strong>.each( function(index, Element) )</strong></p>
+
+<p>Der Code zeigt jedoch einen kleinen Unterschied, es ist auch ein Array-Parameter, an der zweiten Stelle möglich.</p>
+
+<p><strong>.each( function(index, Element),args )</strong></p>
+
+<p><span style="font-family: Georgia;">Wird ein Argument übertragen wird dieses statt dem <em>Index</em> und <em>Element </em>an die Methode übergeben. Die Übergabe passiert mit <em>callback.apply</em>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">dadurch wird dem Callback ein eigenes this übergeben</a> und die angegebenen Parameter gefüllt.</span></p>
+
+<p><span style="font-family: Georgia;">Wird kein Argument übergeben, erfolgt der Aufruf mit <em>callback.call</em>, und <em>index</em> und Element. Dieser weg ist in der API-Beschreibung auch dokumentiert.</span></p>
+<h1>Gut lesbarer Code</h1>
+<p>Unabhängig von den Implementierungsdetails, ist mir die gute Lesbarkeit des Codes aufgefallen. Die Funktion könnte leicht um ein paar Zeilen verkürzt werden, doch würden diese Änderungen das Verständnis wesentlich erschweren.</p>
+<h1>Zugriff auf Objekte</h1>
+<p>Die each-Funktion nimmt nicht nur Arrays entgegen, sondern auch normale Objekte. JavaScript bietet die Möglichkeit, auf Object-Properties, über eine Array Syntax zu zu greifen. Hier ein kleines Beispiel.</p>
+
+<p><span style="font-family: Helvetica;">var andreas = { name:’Andreas’ };
+andreas[‘name’]; =&gt; liefert Andreas zurück.</span></p>
+
+<p><em>Die möglichen Properties können in einer Schleife abgefragt werden.</em></p>
+
+<p><span style="font-family: Helvetica;">for(i in obj){
+obj[i];
+}</span></p>
+<h1>Behandlung von dynamischer Parameteranzahl</h1>
+<p>In diesem Zusammenhang ist mir die Verwendung einer <a href="http://stackoverflow.com/questions/2141520/javascript-variable-number-of-arguments-to-function">dynamischen Anzahl von Parametern</a> unter gekommen. Persönlich kannte ich diese Möglichkeit noch nicht, realisiert wird diese über den <em>arguments</em> Parameter.</p>
+<pre>function foo() {
+  for (var i = 0; i &lt; arguments.length; i++) { 
+    alert(arguments[i]); 
+  } 
+}</pre>
+<h1>jQuery auseinander nehmen</h1>
+<p>Nach der ersten Inspektion wollte ich den Code so weit wie möglich verkleinern. Die Ausführung und Test machte ich dabei mit <a href="http://nodejs.org/">node.js</a> und <a href="http://visionmedia.github.io/mocha/">Mocha</a>. Dabei sind jedoch keine sehenswerten Ergebnisse heraus gekommen.</p>
+
+<p>Mal sehen was es noch zu entdecken gibt.</p>
+
+<p><a href="http://www.flickr.com/photos/exil-fischkopp/">Fotoquelle</a></p>

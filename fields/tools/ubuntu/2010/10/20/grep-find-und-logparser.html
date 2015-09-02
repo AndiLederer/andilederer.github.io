@@ -1,0 +1,64 @@
+<p>Mit den Comamndline-Tools habe ich nicht immer nur Freude, auch wenn alle Optionen in der Hilfe ersichtlich sind, kommt es doch oft auf die Reihenfolge und ein paar Feinheiten an, die ich gerne vergesse. Deshalb gibt es hier ein paar Beispiele zu den oben genannten Tools.</p>
+
+<p><strong>Grep</strong></p>
+
+<p>Der Befehl dient zum durchsuchen von Dateien nach einem Text. Für die Suchpattern kann normaler Textvergleich und Regular Expressions verwendet werden.</p>
+
+<p>Die von mir am häufigsten verwendeten Opdionen sind:</p>
+<ul>
+	<li>-r recursiv</li>
+	<li>--exclude-dir=</li>
+	<li>--include-dir=</li>
+	<li>-i ignoreCase</li>
+	<li>-e Suchtext (Regular Expression)</li>
+	<li>-f Filematch</li>
+	<li>-n mit Zeilennummer</li>
+</ul>
+<p>Eine Beispielzeile zum Durchsuchen aller .cs und .aspx Dateien, mit Schreiben in eine Datei.</p>
+<blockquote>grep -r --exclude-dir=.svn --include='*.{cs,aspx}' -i -n -e 'suchtext' ./ &gt; search.txt</blockquote>
+<p>Die Zeichen ‘./’ stehen für den aktuellen Pfad und werden hier als Startpfad verwendet. Wenn es keine Unterverzeichnisse gibt,</p>
+
+<p>kann auch ‘* ‘ für alle Dateien verwendet werden.</p>
+
+<p>Suchen von Wort in Textfile:</p>
+<blockquote>grep 'error' error.log</blockquote>
+<p><strong>Find</strong></p>
+
+<p>Dient zum Finden von Dateien<strong> </strong>und ist ein optimaler Partner von Grep. Hier finden sich auch sehr viele gute Beispiele am Ende der Man-Page.</p>
+
+<p>Das von mir am meisten verwendete Kombination ist:</p>
+<blockquote>find . -iname "*Suchtext*"</blockquote>
+<p>Falls dann noch Feinheiten abgestimmt werde sollen, kann auch mittels grep ein weiterer Filter eingerichtet werden.</p>
+<blockquote>find . -iname "*Suchtext*" | grep filter</blockquote>
+<p>Find und Grep kann mit hilfe von Cygwin auch unter Windows verwendet werden.</p>
+
+<p><strong>LogParser Windows
+</strong></p>
+
+<p>Dieser passt hier nicht ganz hinein, da es sich hier um keinen Unix/Linux Shell Befehl handelt sondern von Microsoft kommt.</p>
+
+<p>Hier ist  im Download ein Handbuch mit einer sehr genauen Beschreibung enthalten.</p>
+
+<p>Der LogParser kann Text-Files mit SQL-Abfragen durchsuchen. Das ist zwar nicht immer leichter als mit <strong>grep</strong>, dafür kann aber gezielt auf eine Spalte im Ausgabefile abgefragt werden.</p>
+
+<p><strong>Felder definieren</strong></p>
+
+<p>Nur weil ein Text-File eine Struktur hat heißt das noch nicht das auch ein Header mit den Spaltennamen vorhanden ist. Diese kann aber leicht manuell in das File eingefügt werden.</p>
+
+<p>Beispiel für Headerdefinition:</p>
+<blockquote>#Fields: field1 field2 ...</blockquote>
+<p>Beispiel für Abfage auf ein W3C File wie es von IIS erzeugt wird.</p>
+<blockquote>LogParser "select coun(*) from file.txt where field2 like '%errer%'" -i:w3c</blockquote>
+<p>Ob eine Verwendung von grep oder LogParser besser ist natülich für jeden selber zu entscheiden.</p>
+
+<p><strong>Links zu ausführlicheren Beschreibungen</strong></p>
+<ul>
+	<li><a href="http://www.serverhowto.de/Auswertung-von-Eventlogs-mit-dem-MS-Logparser.401.0.html" target="_blank">ServerHOWTO</a></li>
+	<li><a href="http://www.codinghorror.com/blog/2005/08/microsoft-logparser.html">CodingHorror</a></li>
+	<li><a href="http://www.strassenprogrammierer.de/logdateien-sql-auswerten_tipp_474.html">Strassenprogrammierer</a></li>
+	<li><a href="http://forums.iis.net/default.aspx?GroupID=51">IIS-Forum</a></li>
+	<li><a href="http://www.gnu.org/software/grep/manual/grep.html">Grep GNU</a></li>
+	<li><a href="http://www.panix.com/~elflord/unix/grep.html" target="_blank">Panix Grep</a></li>
+	<li><a href="http://linux.about.com/od/commands/l/blcmdl1_find.htm">LinuxAbout</a></li>
+</ul>
+<p>Carpe Diem.</p>

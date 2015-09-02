@@ -1,0 +1,28 @@
+<p>ImageMagick kann auch mit PDF umgehen, in der Standardinstallation aber nicht. Für PDF Konvertierung muss Ghostscript installiert sein.</p>
+
+<p>Eine ziemlich vollständige Liste findet sich direkt auf der unter <a title="ImageMagick Formats" href="http://www.imagemagick.org/script/formats.php" target="_blank">ImageMagick</a>.</p>
+
+<p>Es wird hier auch beschrieben wie auf mögliche CropBoxen im PDF Rücksicht genommen werden.</p>
+<blockquote>To force ImageMagick to use the CropBox or TrimBox rather than the MediaBox, use -define (e.g. -define pdf:use-cropbox=true or -define pdf:use-trimbox=true). Use -density to improve the appearance of your PDF rendering (e.g. -density 300x300).</blockquote>
+<p>Für alle die an der Qualität der Umwandlung interessiert sind, sollten unbedingt den „Density“ Wert setzen. 300x300 steht hier für die stardard Druckqualität von 300DPI.</p>
+
+<p>Bei mehrseitigen PDF-Files wird pro Seite ein Bild erstellt, wobei eine fortlaufende Nummer vergeben wird.</p>
+
+<p><strong>Verwendung von C# mit ImageMagic
+</strong></p>
+
+<p>ImageMagick kann auch in Verbindung mit C# verwendet werden. Auf CodePlex existiert ein Port mit dem Namen „<a title="Imagemagick Codeplex" href="http://imagemagick.codeplex.com/" target="_blank">ImageMagickNet</a>“. Mit der Standardinstallation kann aber auch eine <a title="ImageMagic Object" href="http://www.imagemagick.org/script/ImageMagickObject.php" target="_blank">COM+ Componente</a> registriert werden.</p>
+
+<p>Das CodePlex Projekt konnte ich nicht erfolgreich einbinden, mit der COM+ Komponente ging das jedoch sehr leicht.</p>
+
+<p>Im Installationsverzeichnis befindet sich das File „ImageMagickObject.dll“, dieses mit dem Befehl</p>
+<blockquote>regsvr32 /c /s Pfad\ImageMagickObject.dll</blockquote>
+<p>einbinden.</p>
+
+<p><strong>Im C# Code</strong></p>
+
+<p>Im Projekt muss die COM-Komponente als Verweis eingebunden werden. Danach kann auf die DLL direkt zugegriffen werden.</p>
+<blockquote>ImageMagickObject.MagickImageClass img = new ImageMagickObject.MagickImageClass();
+Object[] convertParam = {@"E:\Projekte\test.pdf", @"E:\Projekte\test.jpg"};
+Object test = img.Convert(ref convertParam);</blockquote>
+<p>Die Parameter sind hier die gleichen wie in der Command Line.</p>

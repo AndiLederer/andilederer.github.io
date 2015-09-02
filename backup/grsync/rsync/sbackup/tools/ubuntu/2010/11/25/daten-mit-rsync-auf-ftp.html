@@ -1,0 +1,32 @@
+<p>Schon seit einiger Zeit beschäftige ich mich mit der Erstellung von Backups von meinen Ubuntu-PC auf ein NAS.</p>
+
+<p>Als Backup-SW wählte ich <a title="SBackup Wiki Seite" href="http://wiki.ubuntuusers.de/sbackup" target="_blank">SBackup</a> und <a title="RSync Wiki" href="http://wiki.ubuntuusers.de/rsync">RSync</a> mit Grsync-GUI.Diese zwei Arten sind für mich notwendig, da ich ein Backup ohne Mediendateien auf NAS mache. Die Mediendateien werden unkomprimiert übertragen, um von anderen PC’s darauf zugreifen zu können.</p>
+
+<p><strong>SBackup </strong></p>
+
+<p>War schnell eingerichtet und kann mit FTP-Laufwerken umgehen. Leider ist nirgends ersichtlich ob ein Backup ausgeführt wird oder wurde. Die Kontrolle kann nur direkt am NAS durchgeführt werden. Bisher gab es noch keine Probleme, einen richtiger Test mit Wiederherstellung habe ich aber jedoch nicht gemacht.</p>
+
+<p><strong>GRsync</strong></p>
+
+<p>Durch die Oberfläche kann eingestellt werden welche Quelle in welches Ziel kopiert werden soll. Leider kann als Ziel nicht direkt ein  FTP-Server verwendet werden.</p>
+
+<p>Als Umweg kann mit dem Programm „curlftpfs“ ein Pfad, auf einem FTP-Server, als Ordner gemounted werden. Folgende Schritte sind notwendig damit „curlftpfs“ funktioniert:</p>
+<ul>
+	<li>Installieren von Paket mit atp-get
+<blockquote>sudo atp-get install curlftpfs</blockquote>
+</li>
+	<li>Benutzer in Gruppe „fuse” einfügen.</li>
+	<li>Auf /etc/fuse.conf Leserechte vergeben
+<blockquote>sudo chmod a+r /etc/fuse.conf</blockquote>
+</li>
+	<li>einen Ordner anlegen in den FTP gemounted werden soll. In diesem Verzeichnis sollten Lese- und Schreibrechte für den Benutzer vergeben werden.</li>
+</ul>
+<p>Zum Abschluss mit dem Befehl</p>
+<blockquote>curlftpfs user:password@ip/path /media/nas</blockquote>
+<p>den FTP-Ordner einbinden.</p>
+
+<p>Der Befehl</p>
+<blockquote>fusermount -u /media/nas</blockquote>
+<p>trennt die Verbindung wieder. Für beide Befehle sollten keine SuperUserrechte notwendig sein. Weitere Quellen hierfür finden sich auf der <a title="WIKI Curlftps" href="http://wiki.ubuntuusers.de/curlftpfs" target="_blank">Ubuntuuser-Wiki</a> Seite.</p>
+
+<p>Carpe Diem.</p>

@@ -1,0 +1,49 @@
+<p>Gleich vorab, der IIS-Server übernimmt einem nicht die Verwaltung von Daten die in mehreren Threads verwendet werden, sondern führt Session abhängige Requests seriell aus.</p>
+
+<p>Aber zuerst einmal wie ich auf das Problem komme und danach welche Möglichkeiten vorhanden sind.</p>
+<h2>UPDATE</h2>
+<p>Die Verwendung der Abfrage “Response.IsClientConnected” hat sich als problematisch heraus gestellt. Es scheint als währen Client Benachrichtigungen mittels JS Intervallsfunktion ein besserer Ansatz. Siehe <a href="http://de.selfhtml.org/javascript/objekte/window.htm#set_interval" target="_blank">selfhtml</a></p>
+<h2>Mein Problem</h2>
+<p>Der Ausgang war ein Request der eingegebenen Formdaten speichert und mit den neuen Daten ein Bild berechnet. Das Bild ist jedoch für den weiteren Arbeitsfluss nicht entscheidend. Trotzdem musste bis zur Fertigstellung gewartet werden.</p>
+
+<p>Die erste Idee war es, den Request mittels Ajax aufzuteilen, um dem Benutzer sofort, nach Speicherung der Daten, die Kontrolle zurück zu geben. Da viele der Daten nur in der Session vorhanden waren und auch die generierten Daten in der Session landen sollten, wurde im Erstellungshandler die Session benötigt.</p>
+
+<p>Bis hierher besteht noch kein Problem. Zu einem Problem wird es erst, wenn während der Bearbeitung ein weiterer Request geschickt wird. Hier wartet der IIS mit der Bearbeitung, bis die schon laufenden Requests beendet sind. Das ist grundsätzlich auch sinnvoll, in meinem Fall jedoch nicht erwünscht.</p>
+
+<p>Eine andere Problembeschreibungen befindet sich auf <a href="http://stackoverflow.com/questions/860478/asp-net-mvc-jquery-iis6-multiple-ajax-requests" target="_blank">stackoverflow</a>.</p>
+<h2>Lösungsmöglichkeiten</h2>
+<p>Die Lösung ist stark abhängig von dem wie sich die Anwendung verhalten soll. In meinem Fall beenden alle Requests, den im Hintergrund laufenden Request. Dadurch kann ich die Requestverwaltung im JavaScript belassen und muss nicht ständig den Server mit neuen Requests fragen, ob schon ein Ergebnis besteht.</p>
+
+<p>Für den ersten Fall gibt es hier auch noch ein Codebeispiel, welches den Request abbricht. Als Ajax-Framework wird hier <a href="http://mootools.net" target="_blank">Mootools</a> verwendet.</p>
+<blockquote>var RequestHandler = new Request({url:’myWebsite’,link:’cancel’),
+
+var funktionHash = {
+
+startRequest: funktion() {abortAbleRequest.Send();},
+
+abortRequest: funktion(){abortAbleRequest.Send(‘abort=true’);}
+
+}
+
+funktionHash.startRequest();
+
+…
+
+funktionHash.abortRequest();</blockquote>
+<p>Das ‘abort=true’ hat im Grunde keine Bedeutung für den Request, kann aber am Server abgefragt werden, damit Bearbeitung nicht noch einmal gestartet wird. Link ‘cancel’ sagt dem Request das bestehende abgebrochen werden.</p>
+<blockquote>if (Request[“abort”] == null ||
+
+!Request[“abort”].Equals(“true”)) {
+
+while(Response.IsClientConnected){
+
+…
+
+}
+
+}</blockquote>
+<p>Über “Response.IsClientConnected” kann geprüft werden, ob der Request noch verwaltet wird.</p>
+
+<p>Diese Lösung hat in meinem Fall ein gutes Ergebnis erzielt. Es handelt sich hier jedoch um Demo-Code und sollte vor einem Einsatz mit einigen Sicherheitsabfragen erweitert werden. Auch kann der Status für den Abbruch oft nicht bis zur eigentlichen Ausführung weitergereicht werden. In diesen Fällen sollte ein eigener Thread gestartet werden, der bei Bedarf abgebrochen werden kann.</p>
+
+<p>Carpe Diem</p>

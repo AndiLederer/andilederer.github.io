@@ -1,0 +1,30 @@
+<p>Dank einer neuen Kamera mit 14MPx und Videoauflösung von 1280x720 ist bei mir die digitale Datenflut so richtig losgebrochen.</p>
+
+<p>Lokal am PC sind die Dateigrößen von Bild ca. 6MB und Video 250MB/Minute noch verkraftbar, für Verteilung an Freunde stellt das schon größere Anforderungen. Da geht jeder Mail-Server bei einem 1 Minuten Video in die Knie.</p>
+
+<p>Als Lösung für mich habe ich “mencoder” ,ist in Paketquellen von Ubuntu enthalten, gefunden. Wobei mir die fehlende GUI fast davon abgehalten hat. Als Alternative gibt es auch noch FFmpeg, der Funktionsumfang ist dort anscheinend ziemlich gleich.</p>
+
+<p>Falls noch jemand auf der Suche nach einem geeigneten Konverter für Filme ist, fasse ich hier die Quellen und meinen Aufruf hinzu.</p>
+
+<p>Quicktime to DivX:(hat bei mir in guter Qualität geklappt)</p>
+<blockquote>mencoder Quelle.MOV -oac mp3lame -ovc xvid -of avi -xvidencopts bitrate=1400000:me_quality=6:aspect=16/9 -vf scale=640:360 -o output.avi</blockquote>
+<p>Wer bei Audio auf Qualität setzt ist auch mit Option “copy” oder “pcm” gut bedient.</p>
+
+<p>Quelle, Bitrate, Quality, Seitenverhältnis, Skalierung und Output sollte natürlich an Bedürfnisse angepasst werden. Bei Test ist bei “me_quality” herausgekommen das “6” der Höchstwert ist.</p>
+
+<p>Zu Quellen auf denen ich Informationen gefunden habe:</p>
+
+<ul>
+  <li>
+    <p><a title="Zu Threade" href="http://www.linuxforen.de/forums/showthread.php?t=257412" target="_blank">Linuxforen.de</a> ging um Problem mit Kvideoencoder</p>
+  </li>
+  <li>
+    <p><a title="Rescale" href="http://www.mplayerhq.hu/DOCS/HTML/de/menc-feat-rescale.html" target="_blank">Doku Scalierung</a></p>
+  </li>
+  <li>
+    <p><a title="XviD Doku" href="http://www.mplayerhq.hu/DOCS/HTML/de/menc-feat-xvid.html#menc-feat-xvid-intro" target="_blank">xvidencopts</a> Dokumentation</p>
+  </li>
+  <li>
+    <p>Für Windows User gibt es da <a title="Super video" href="http://www.erightsoft.com/S6Kg1.html" target="_blank">Super</a></p>
+  </li>
+</ul>

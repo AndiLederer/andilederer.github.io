@@ -1,0 +1,41 @@
+<p>Normal bewege ich mich nur in der Linux-Shell, in den letzten Wochen habe ich aber ein paar Synchronisation- und Backup-Scripts unter MS-Windows angelegt.</p>
+
+<p>Aus meiner Sicht  hat sich mit der <a href="http://de.wikipedia.org/wiki/Windows_PowerShell">Powershell</a> einiges möglich, was ich mit Windows nicht für möglich hielt.</p>
+
+<p>Verwirrend fand ich die neuen Möglichkeiten die in der „Aufgabenplanung“ integriert wurden. Nach der ersten Eingewöhnung funktionierte aber alles wie erwartet.</p>
+
+<p><strong>Robocopy</strong></p>
+
+<p>Das Tool eignet sich hervorragend zwei Verzeichnisse miteinander abzugleichen. Es werden dabei nur unterschiedliche Dateien aktualisiert. Mit eigener Option können auch Dateien die im Quellverzeichnis nicht mehr enthalten sind aus dem Zielverzeichnis entfernt werden.</p>
+
+<p>Das Tool hat eine eingebaute Hilfe, die die Möglichkeiten gut beschreibt. Auf <a title="Wiki Robocopy" href="http://en.wikipedia.org/wiki/Robocopy" target="_blank">Wikipedia</a> findet sich dazu ebenfalls eine Beschreibung.</p>
+
+<p><strong>WinRAR</strong></p>
+
+<p><a title="WinRAR" href="http://www.winrar.de/">WinRAR</a> ist ebenfalls kein Tool was eine eigene Beschreibung benötigt. Die Möglichkeit es aus der Commandline zu verwenden, wird jedoch nicht sehr oft verwendet. Dabei bietet es hier alle Funktionen die aus der Ansicht gewohnt sind.</p>
+
+<p>Hier ein kleines Beispiel mit dem aus einem Verzeichnis mit allen Unterverzeichnissen ein RAR-File erstellt wird. Dem File wird das aktuelle Datum angefügt.</p>
+<blockquote>For /f "tokens=1-3 delims=. " %%a in ('date /t') do (set date=%%c%%b%%a)
+
+echo %date%
+call C:\Programme\WinRAR\rar a -m5 -r E:\RARBackup\backup_%date%.rar  E:\Backup\*.*</blockquote>
+<p><strong>Parameter Erklärung</strong></p>
+<ul>
+	<li>a  Fügt Dateien zu einem Archiv hinzu</li>
+	<li>-m5  Gibt den Komprimierungsgrad an 1 min .. 5 max</li>
+	<li>-r Alle Files in den Unterverzeichnissen werden ebenfalls berücksichtigt.</li>
+	<li>Erste Datei ist die Zieldatei</li>
+	<li>Zweiter Pfad ist das Quellverzeichnis</li>
+</ul>
+<p>Wird die Rar.exe ohne Parameter aufgerufen werden alle Optionen ausgegeben.</p>
+
+<p><strong>Warum Commandline?</strong></p>
+
+<p>Commandline und Batch haben den Vorteil, dass die Befehle beliebig miteinander kombiniert werden können. Im Batch-File kann die Abfolge fix definiert und immer wieder ausgeführt werden. Mit der „Aufgabenplanung“ können diese dann zu beliebigen Zeiten ausgeführt werden.  Dieses Verhalten eignet sich besonders für die Erstellung von individuellen Sicherungen.
+<strong></strong></p>
+
+<p><strong>Man muss dafür kein SW/Computerspezialist sein</strong></p>
+
+<p>Was man eigentlich erreichen möchte, sollte man jedoch schon wissen. Eine Übersicht von möglichen Scripts findet sich im <a title="MS Scriptcenter" href="http://technet.microsoft.com/de-de/scriptcenter/" target="_blank">ScriptCenter</a>.</p>
+
+<p>Carpe Diem.</p>

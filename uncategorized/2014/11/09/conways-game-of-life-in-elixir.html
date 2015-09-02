@@ -1,0 +1,20 @@
+<p><img src="https://farm6.staticflickr.com/5025/5598586627_cedda3cff3_n.jpg" /></p>
+<p>Die Programmiersprache “Erlang” ist in letzter Zeit wieder mehr im Gespräch, vor allem wenn es um Funktionale Programmierung geht. Die Syntax schreckte mich jedoch immer ab. Bei <a href="http://dotnetrocks.com/" target="_blank">.Net Rocks</a> hörte ich das erste Mal über die Programmiersprache Elixir, die auf der Erlang-VM ausgeführt wird. Die Besonderheit ist, dass die Syntax sehr stark an Ruby angelehnt ist und damit für viele verständlich sein sollte. Mit kleinen Ruby-Kenntnissen und ohne Erfahrung in Funktionaler Programmierung machte ich mit Sicherheit die schönsten Anfängerfehler. Hier eine Zusammenfassung meiner Eindrücke.</p>
+<h2>Rekursion und Schleifen</h2>
+<p>In allen mir bekannten Programmiersprachen gibt es Schleifen. In Elixir gibt es jedoch nur Funktionen die als Schleife genutzt werden können oder die Möglichkeit der Rekursion. Damit hatte ich nicht gerechnet und dieser Umstand hat mir sicher einen Abende an Nachforschungen gekostet. Die Macher der Programmiersprache haben jedoch an uns Programmierer gedacht und ein eigenes <a href="http://elixir-lang.org/getting_started/9.html" target="_blank">Getting-Startet Kapitel für Rekursionen</a> gemacht in dem die Verwendung sehr gut erklärt wird.</p>
+<h2>Zustand und Agents</h2>
+<p>Für dieses Aufgabe wäre es nicht notwendig gewesen den Zustand des Spielbrettes extra zu Verwalten, aber da es hier um den Weg und nicht das Ziel ging durfte diese Funktion aus dem Erlang OTP-Package nicht fehlen.<br />Die Implementierung war äußerst einfach. Das Agentmodul verfügt eigentlich nur über drei wichtige Funktionen:</p>
+<ul> <li><strong>start_link</strong> zum Starten des Prozesses, der Prozess kann zur weiteren Verwendung mit einem Namen verknüpft werden. In meinem Beispiel<pre><p><code>Agent.start_link(fn –&gt; Board.create_board(length,height) end, </code></p><blockquote><p><code>             name: __MODULE__)</code></p></blockquote></pre><strong>__MODULE__</strong> ist ein Platzhalter für den umschließenden Modulname 
+<li><strong>get&nbsp; </strong>liefert den aktuellen Wert, es kann eine Funktion entgegen nehmen. Meistens wird eine Funktion aus einem Modul übergeben. 
+<li><strong>update</strong> damit kann der Wert innerhalb der Daten verändert werden.</li>
+<h2>Patternmatching und IF-Statement</h2>
+<p>Patternmatching war für mich bis jetzt ein Begriff der stark mit Voodoo verknüpft war. Seit den ersten Gehversuchen hat sich diese Technik jedoch als sehr vielseitig und nützlich erwiesen. Im Detail heißt das, ich konnte das Programmierbeispiel komplett ohne ein einziges IF-Statement erstellen. Die Stärke liegt dabei auf der Einbindung in die Methodensignatur, so sind einzelne IF-Zweige als zwei unterschiedliche Methoden realisierbar.</p>
+<p>Das Beispiel zeigt die Prüfung auf leere oder befüllte Liste mit Aufteilung auf erstes und letzten Elemente.</p><pre><p><code>def x([head|tail]) do … end</code></p><p><code>def x([]) do … end</code></p></pre>
+<h2>Gesamteindruck</h2>
+<p>Der Gesamteindruck war durchwegs positiv. Die Dokumentation ist gut und alle Bereiche sind gut erklärt. Die Stabilität der Sprache konnte ich mit diesem Beispiel nicht wirklich testen, es traten jedoch keine Überraschungen auf. Durch die Verwendung der Erlang-VM sind hier auch keine Überraschungen zu erwarten. Die einzigen Fragezeichen in meinem Kopf entstanden durch die Vermischung von Abhängigkeiten aus Git-Repositories und dem <a href="https://hex.pm/" target="_blank">Hex-Packagemanager</a>. Die Fehlermeldungen und die Dokumentation brachte mich auch hier schnell ans Ziel.</p>
+<p><strong>Hilfreiche Links:</strong></p>
+<ul>
+<li><a href="https://github.com/elixir-lang/" target="_blank">Git Projekte</a> im Zusammenhang mit Elixir 
+<li><a href="http://elixir-lang.org/getting_started/mix_otp/1.html" target="_blank">Getting Started</a> Beispielprojekt 
+<li><a href="https://github.com/AndiLederer/elixir_conway" target="_blank">Meine Implementierung</a></li>
+</li></li></ul></li></li></ul>

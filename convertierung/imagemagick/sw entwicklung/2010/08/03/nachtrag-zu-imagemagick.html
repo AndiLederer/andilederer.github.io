@@ -1,0 +1,22 @@
+<p>Seit dem letzten Eintrag konnte ich noch ein paar Details zu ImageMagick und C# herausfinden.</p>
+
+<p><strong>Verarbeitung im Speicher</strong></p>
+
+<p>Ein Standardfall ist die Bearbeitung von Bilddaten im Speicher. Imagemagick ist aber auf die Konvertierung von Dateien spezialisiert. In einem beiliegenden Visual Basic Script ist zwar ein Beispielscript enthalten wie das funktionieren könnte, dieses liefert jedoch keine befriedigenden Ergebnisse. Mit VisualBasic.Net erzeugt der gleiche Code, einen Fehler wegen Sicherheitsverletzung bei der Umwandlung von Rückgabedatentypen.</p>
+
+<p><strong>Geschwindigkeit der Konvertierung von PDF zu JPG
+</strong></p>
+
+<p>Die Geschwindigkeit, bei der Konvertierung, ist im Vergleich mit der API von PDF-Tools nicht überzeugend.</p>
+
+<p>Der Vergleich ist aber auch sehr streng, da die Lösungen von PDF-Tools auf PDF-Umwandlung spezialisiert ist und ImageMagick für einen allgemeinen Einsatz ausgelegt ist. ﻿ImageMagick ﻿verwendet das Tool „<a title="GhostScript" href="http://www.ghostscript.com/" target="_blank">GhostScript</a>“ zum laden der PDF-Files, wo wahrscheinlich auch die meiste Zeit verbleibt.</p>
+
+<p><strong>Fazit</strong></p>
+
+<p>Für Lösungen in denen PDF-Files nicht ständig für die Anzeige konvertiert werden müssen, sondern nur einmalig beim Import, ist ImageMagick sicherlich ausreichend.</p>
+
+<p>Wird ImageMagick schon in anderen Bereichen für Bildkonvertierung verwendet, macht es natürlich Sinn es  auch für die PDF Umwandlung zu verwenden.</p>
+
+<p>Diese Einschätzung bezieht sich ausschließlich auf .Net und C#, für andere Programmiersprachen muss das Verhalten sicher extra geprüft werden.</p>
+
+<p>Auf die Lizenz von GhostScript sollte bei der Verwendung ebenfalls geachtet werden, da GPL nur für die nicht kommerzielle Nutzung gedacht ist.</p>

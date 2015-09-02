@@ -1,0 +1,41 @@
+<p>Vor ca. einer Woche bekam ich Aufgabe, einen DVB-T USB-Stick für das Ubuntu-Notebook meiner Eltern auszuwählen und zu insallieren.</p>
+
+<p>Meine Wahl fiel dabei auf Pinnacle DVB-T Stick Solo 72e, ein eher Preisgünsitiges Modell für ca. € 35,- im Handel erhältlich. Im Vorfeld prüfte ich auf der <a title="Wiki Ubuntuusers" href="http://wiki.ubuntuusers.de/Baustelle/Pinnacle_PCTV_DVB-T_Stick_Solo_(72e)" target="_blank">UbuntuUsers</a> Seite, ob dieser auch funktioniert.</p>
+
+<p>Funktioniert hat der DVB-T Stick auf Anhieb, dazu habe ich folgende Anleitung befolgt.</p>
+
+<p>Firmeware kopiert:</p>
+<blockquote>
+<pre>cd /lib/firmware
+sudo wget <a class="external free" title="http://www.wi-bw.tfh-wildau.de/~pboettch/home/linux-dvb-firmware/dvb-usb-dib0700-1.10.fw" rel="nofollow" href="http://www.wi-bw.tfh-wildau.de/%7Epboettch/home/linux-dvb-firmware/dvb-usb-dib0700-1.10.fw">http://www.wi-bw.tfh-wildau.de/~pboettch/home/linux-dvb-firmware/dvb-usb-dib0700-1.10.fw</a></pre>
+</blockquote>
+<p>Danach Video4Linux kompelieren, benötigt werden dazu die Kernel Header zum verwendeten Kernel.</p>
+<blockquote>wget <a href="http://www.barbak.org/v4l_for_72e_dongle.tar.bz2" target="_blank">http://linuxtv.org/hg/v4l-dvb/archive/tip.tar.bz2</a>
+tar <a href="http://www.barbak.org/v4l_for_72e_dongle.tar.bz2" target="_blank">tip.tar.bz2</a>
+cd v4l-dvb....
+make all
+sudo make install
+sudo reboot</blockquote>
+<p>Nach Neustart einfach DVB-T Stick anstecken, zur Prüfung ob alles funktioniert hat den Befehl</p>
+<blockquote>dmesg | grep dvb</blockquote>
+<p>eingeben. Sollte dort etwas von “Cold State” und Firmware “dib0700-1.20.fw” stehen Firmware umbenennen, sonst steht dort das Treiber erfolgreich geladen wurde.</p>
+
+<p>Danach kam noch der Teil zum einrichten von Kaffeine, einer Software um Filme anzuzeigen.</p>
+
+<p>Erster Schritt war Sendersuche mittels <a title="w_scan seite" href="http://wirbel.htpc-forum.de/w_scan/index2.html" target="_blank">w_scann</a>, in dem Downloadfile ist auch schon ein Build vorhanden. Sollte dieser nicht funktionieren, kann dieser mittels “make” neu erstellt werden. Fragt mich nicht warum aber bei mir war das notwendig, vermutlich lag es an Unterschied bei Kernel-Version.</p>
+
+<p>Befehl zum Ausführen des Sendersuchlaufes und anlegen von dvb-t Verzeichnis falls noch nicht vorhanden.</p>
+<blockquote>mkdir ~/.kde/share/apps/kaffeine/dvb-t
+./w_scan -x &gt; ~/.kde/share/apps/kaffeine/dvb-t/at-wels</blockquote>
+<p>Danach wird Kaffeine mittels</p>
+<blockquote>kaffeine -dvb</blockquote>
+<p>aufgerufen. Dort kann das neu erstellte File gewählt werden und nach den Einstellungen darin nach Sendern gesucht werden. Als kleine Hilfe wird dabei auch die Signalstärke angezeigt.</p>
+
+<p>Quellen aus denen Aufrufe stammen:</p>
+<ul>
+	<li><a title="Ubuntuusers" href="http://ubuntuforums.org/showthread.php?t=659846" target="_blank">Ubuntuusers</a></li>
+	<li><a title="eeewiki" href="http://www.eeewiki.de/index.php/Pinnacle_PCTV_DVB-T_Stick_Solo_(72e)" target="_blank">eeewiki</a></li>
+	<li><a title="Martin Pitt" href="http://martinpitt.wordpress.com/2008/06/10/packaged-dvb-t-drivers-for-ubuntu-804/" target="_blank">Martin Pitt</a></li>
+	<li><a title="htpc-forum" href="http://wirbel.htpc-forum.de/w_scan/index2.html" target="_blank">w_scan</a></li>
+	<li><a title="Koffeine" href="http://hftom.free.fr/phpBB2/viewtopic.php?t=178" target="_blank">hftom</a></li>
+</ul>

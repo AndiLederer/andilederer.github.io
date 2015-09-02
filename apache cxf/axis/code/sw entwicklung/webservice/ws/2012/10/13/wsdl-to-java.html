@@ -1,0 +1,46 @@
+<p>Jede Java-Anwendung kann auf WebServices zugreifen. Ant- oder Mavenscripts können einem die Anlage der Clientschnittstelle erheblich erleichtern. Im Vergleich zur Erstellung des Clientzugriffes über die IDE, sehe ich einen eindeutigen Vorteil bei der Wiederholbarkeit. Die Scripts können unabhängig von einer IDE, mit den gleichen Einstellungen ausgeführt werden.</p>
+<div>Die bekanntesten Clienttools sind <a href="http://axis.apache.org/axis2/java/core/tools/CodegenToolReference.html">Axis2</a> und <a href="http://cxf.apache.org/docs/wsdl-to-java.html">Apache-CXF</a>.</div>
+<div></div>
+<div><strong>Axis2 Anttask</strong></div>
+<p>[sourcecode language=”xml”]
+  &lt;target name="axisWsdl2java"&gt;
+    &lt;path id="axis2.classpath"&gt;
+      &lt;fileset dir="D:/libs/axis2/axis2-2.6.2/lib"&gt;
+         &lt;include name="<em>*/</em>.jar"/&gt;
+      &lt;/fileset&gt;
+    &lt;/path&gt;
+    &lt;taskdef name="axis2-wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="axis2.classpath"/&gt;
+    &lt;axis2-wsdl2java overwrite="true" wsdlfilename="http://localhost:8080/service/Service?wsdl"/&gt;
+  &lt;/target&gt;
+[/sourcecode]</p>
+<div></div>
+<div><strong>CXF Anttask</strong></div>
+<p>[sourcecode language=”xml”]</p>
+
+<p>&lt;property name="cxf.home" location ="d:/libs/apache-cxf-2.6.2" /&gt;
+  &lt;path id="cxf.classpath"&gt;
+     &lt;fileset dir="${cxf.home}/lib"&gt;
+        &lt;include name="*.jar"/&gt;
+     &lt;/fileset&gt;
+  &lt;/path&gt;</p>
+
+<p>&lt;target name="cxfWSDLToJava"&gt;
+     &lt;java classname="org.apache.cxf.tools.wsdlto.WSDLToJava" fork="true"&gt;
+        &lt;arg value="-client"/&gt;
+        &lt;arg value="-d"/&gt;
+        &lt;arg value="${project.dir}/src_wsdl"/&gt;
+        &lt;arg value="http://localhost:8080/service/Services?WSDL"/&gt;
+        &lt;classpath&gt;
+           &lt;path refid="cxf.classpath"/&gt;
+        &lt;/classpath&gt;
+     &lt;/java&gt;
+  &lt;/target&gt;</p>
+
+<p>[/sourcecode]</p>
+<div></div>
+<div><strong>Java Code</strong></div>
+<div>In beiden Fällen werden alle in den WSDL definierten Klassen angelegt. Beim Service-Stub kann in beiden Fällen eine URL im Konstruktor übergeben werden. Bei Axis kann die URL als String-Wert ohne "?WSDL" Endung übergeben werden. CXF benötigt ein URL-Object mit dem vollständigen WSDL-Pfad.</div>
+<div>Die URL-Generierung kann im Service-Stub Standardkonstruktor geprüft werden.</div>
+<div></div>
+<div><strong>Unterschiede</strong></div>
+<div>Von der Verwendung, Geschwindigkeit und der Zuverlässigkeit konnte ich keine Unterschiede feststellen. Trotzdem gibt es WSDL-Files die nur von einer der beiden Frameworks richtig implementiert werden. In einem meiner Projekte hatte Axis, in der Version 2.6.2, Probleme mit einem WS das mit einem JBoss7.1 zur Verfügung gestellt wurde. Apache-CXF hatte damit keine Probleme.</div>

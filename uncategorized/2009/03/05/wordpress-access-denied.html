@@ -1,0 +1,9 @@
+<p>Heute habe ich es geschafft, ich habe gleich zwei meiner Blogs offline gestellt und alles nur weil ich eine schönere URL (Permalink) zu den Posts haben wollte.
+Nach Recherche in <a class="wp-caption-dd" title="Wordpress Forum" href="http://forum.wordpress-deutschland.org/lexikon/htaccess-13/alle-eintraege-1.html" target="_blank">WP-Forum</a> wusste ich das dieses Problem viele Nutzer betrifft und ein File .htaccess dafür verantwortlich ist und genau diese konnte ich nicht finden..
+Da ich auch nur über Web-Space verfüge, wusste ich zuerst nicht einmal ob ich das alleine beheben kann. Zum Glück las ich in einem Forum, dass nicht jeder FTP-Client versteckte Files anzeigt. So probierte ich WinSCP und dieser zeigte verstecktes File .htaccess an.
+Nach dieser Geschichte noch Beschreibung wie man “Permalink” zurück setzen kann.</p>
+
+<ol>
+  <li>in Tabelle wp_option Eintrag permalink_structure finden und Value löschen.</li>
+  <li>File .htaccess im Root-Verzeichnis finden und entfernen.</li>
+</ol>
